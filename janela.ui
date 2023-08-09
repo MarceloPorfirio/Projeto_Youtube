@@ -92,7 +92,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>MP3</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_2">
@@ -105,7 +105,28 @@
      </rect>
     </property>
     <property name="text">
-     <string>RadioButton</string>
+     <string>MP4</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>30</y>
+      <width>271</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Sans Serif</family>
+      <pointsize>18</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>DOWNLOAD YOUTUBE</string>
     </property>
    </widget>
   </widget>
@@ -121,6 +142,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="youtube.png"/>
+ </resources>
  <connections/>
 </ui>
