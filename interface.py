@@ -1,10 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
+from pytube import YouTube
 
 def download_youtube():
     link = link_entry.get()
     titulo = titulo_entry.get()
     formato = formato_var.get()
+
+    url = link_entry.get()
+
+    yt = YouTube(url)
+
+    video = yt.streams.get_highest_resolution()
+    video.download()
+
     
     # Lógica para realizar o download aqui
     
