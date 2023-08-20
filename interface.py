@@ -1,30 +1,44 @@
 import tkinter as tk
 from tkinter import ttk
 from pytube import YouTube
+from tkinter import messagebox
+import validators
+from moviepy.editor import VideoFileClip
+
+def convert_to_mp3(input_path, output_path):
+    try:
+        video = VideoFileClip(input_path)
+        audio = video.audio
+        audio.write_audiofile(output_path)
+        audio.close()
+        video.close()
+    except Exception as e:
+        raise Exception(f"Erro ao converter para MP3: {str(e)}")
+
+def yt_download(url, title):
+    try:
+        yt = YouTube(url)
+        stream = yt.streams.get_highest_resolution()
+        video_path = f"downloads/{title}.mp4"
+        stream.download(output_path='downloads/', filename=title)
+        
+        mp3_output_path = f"downloads/{title}.mp3"
+        convert_to_mp3(video_path, mp3_output_path)
+        messagebox.showinfo("Download Concluído", f"Download do áudio '{title}' concluído com sucesso!")
+    except Exception as e:
+        messagebox.showerror("Erro de Download", f"Ocorreu um erro durante o download:\n{str(e)}")
 
 def download_youtube():
-    link = link_entry.get()
-    titulo = titulo_entry.get()
-    formato = formato_var.get()
-
     url = link_entry.get()
+    titulo = titulo_entry.get()
 
-    yt = YouTube(url)
+    if not validators.url(url):
+        messagebox.showerror("URL Inválida", "Por favor, insira uma URL válida do YouTube.")
+        return
 
-    video = yt.streams.get_highest_resolution()
-    video.download()
+    yt_download(url, titulo)
 
-    
-    # Lógica para realizar o download aqui
-    
-    print("Link:", link)
-    print("Título:", titulo)
-    print("Formato:", formato)
-
-# Configuração da janela
 root = tk.Tk()
-root.title("Download Youtube")
-
 # Obtendo as dimensões da tela
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
